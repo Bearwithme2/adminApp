@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Review Users{% endblock %}
+
+{% block body %}
+
+	<div>
+		<h1> List of users:</h1>
+
+		<table class="user-table">
+			<tr>
+				<th>Name</th>
+				<th>Password</th>
+				<th>Email</th>
+				<th>Privilege</th>
+			</tr>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.name }} </td>
+					<td> {{ user.password|escape }} </td>
+					<td> {{ user.email }} </td>
+					<td> {{ user.privilege ? 'Yes' : 'No' }}</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td><em>No user found</em></td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}

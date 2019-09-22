@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Users{% endblock %}
+
+{% block body %}
+
+	<div>
+		<h1>Add User</h1>
+
+		<form method="post">
+			<ul class="add-user">
+				<li>
+					<label>
+						<strong>Name: </strong>
+						<input type="text" name="username">
+					</label>
+				</li>
+				<li>
+					<label>
+						<strong>Password: </strong>
+						<input type="password" name="password">
+					</label>
+				</li>
+				<li>
+					<label>
+						<strong>Email: </strong>
+						<input type="email" name="email">
+					</label>
+				</li>
+				<li>
+					<label>
+						<strong>Admin: </strong>
+						<input type="checkbox" name="privilege">
+					</label>
+				</li>
+				<li>
+					<input type="submit" name="add" value="Add user">
+				</li>
+			</ul>
+		</form>
+	</div>
+{% endblock %}
