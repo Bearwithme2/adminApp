@@ -1,0 +1,32 @@
+/* navlist */
+#navlist {
+	list-style: none;
+	padding: 0 0 0 0;
+}
+
+#navlist li {
+	list-style-type: none;
+	display: inline;
+	padding-right: 20px;
+}
+
+/* add user */
+ul.add-user {
+	list-style: none;
+	padding-left: 0;
+}
+
+.add-user li {
+	padding-bottom: 10px;
+	width: 100px;
+}
+
+/* user list */
+.user-table {
+	border: 1px solid #000;
+}
+
+.user-table td {
+	border: 1px solid #000;
+	width: 100px;
+}
