@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Services\JsonConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,9 +18,12 @@ class UserController extends AbstractController
 	 */
 	public function index(): Response
 	{
-		$users = $this->getDoctrine()
-			->getRepository(User::class)
-			->findAll();
+		$users = $this->getDoctrine()->getRepository(User::class)->findAll();
+
+		/**
+		 * Zde by se v REST API posilal JsonResponse s daty
+		 * javascript by potom tyhle data rozlozil do sablony
+		 */
 
 		return $this->render('user/index.html.twig', [
 			'users' => $users,
@@ -29,10 +33,15 @@ class UserController extends AbstractController
 	/**
 	 * @Route("/user/add", name="addUser")
 	 */
-	public function add(Request $request): Response
+	public function add(Request $request, JsonConverter $jsonConverter): Response
 	{
-		$c = $this->convertToJson($request->getContent());
-		$content = json_decode($c, TRUE);
+		$content = $jsonConverter->convertRequestToArray($request->getContent());
+
+		/**
+		 * po validaci z javascriptu na frontendu by
+		 * zde probihala finalni validace dat z formulare
+		 * pred ulozenim do databaze
+		 */
 
 		if (count($content) > 0) {
 
@@ -47,22 +56,8 @@ class UserController extends AbstractController
 			$entityManager->flush();
 		}
 
-
+		/** v REST API by zde byl navratovy status jestli se ukladani povedlo nebo ne */
 		return $this->render('user/addUser.html.twig', []);
-	}
-
-	private function convertToJson($data): string
-	{
-		$e = explode('&', $data);
-		$a = [];
-		foreach ($e as $item) {
-			$b = explode('=', $item);
-			if (array_key_exists(1, $b)) {
-				$a[$b[0]] = $b[1];
-			}
-		}
-
-		return json_encode($a);
 	}
 
 }

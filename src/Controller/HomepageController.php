@@ -13,6 +13,5 @@ class HomepageController extends AbstractController
 	public function home()
 	{
 		return $this->render('base.html.twig', []);
-
 	}
 }

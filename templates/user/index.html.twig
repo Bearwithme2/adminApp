@@ -5,7 +5,7 @@
 {% block body %}
 
 	<div>
-		<h1> List of users:</h1>
+		<h1>List of users:</h1>
 
 		<table class="user-table">
 			<tr>
@@ -16,7 +16,7 @@
 			</tr>
 			{% for user in users %}
 				<tr>
-					<td>{{ user.name }} </td>
+					<td> {{ user.name }} </td>
 					<td> {{ user.password|escape }} </td>
 					<td> {{ user.email }} </td>
 					<td> {{ user.privilege ? 'Yes' : 'No' }}</td>
